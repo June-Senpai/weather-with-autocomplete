@@ -6,7 +6,7 @@ const AutoComplete = ({ autoCompleteState, setSelectedLocality, setInputValue })
     setInputValue(item);
   };
   return (
-    <div className="">
+    <div className="border-b-2">
       {autoCompleteState.map((item, index) => (
         <div key={index} onClick={() => handleClick(item.localityName)} className="">
           {item.localityName}

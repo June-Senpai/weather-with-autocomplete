@@ -1,9 +1,24 @@
+import Image from "next/image";
 import Weather from "./components/Weather";
 
 export default function Home() {
   return (
-    <div className="">
+    <main className="flex h-screen justify-center items-center flex-col gap-4">
+      {/* <Image
+        src={"https://www.olognlabs.com/img/logo-white-text.svg"}
+        height={111}
+        width={330}
+        alt="Logo"
+        className="bg-[#1b1b1d] p-2 rounded-lg"
+      /> */}
+      <Image
+        src={"./logo-white-text.svg"}
+        height={111}
+        width={330}
+        alt="Logo"
+        className="bg-[#1b1b1d] p-2 rounded-lg"
+      />
       <Weather />
-    </div>
+    </main>
   );
 }
