@@ -4,6 +4,7 @@ import { getAutoComplete, getWeatherData } from "../util/serverAction";
 import AutoComplete from "./AutoComplete";
 import Image from "next/image";
 import Button from "./ui/button";
+import WeatherCard from "./ui/WeatherCard";
 
 type WeatherDataProps = {
   temperature: number;
@@ -72,7 +73,7 @@ const Weather = () => {
             alt="Logo"
             className="absolute top-[18px] left-5 "
           />
-          <div className="absolute border-x-2 top-12 w-full left-0 indent-4 rounded-b-md shadow-lg">
+          <div className="absolute border-x-2 top-12 w-full left-0 indent-4 rounded-b-md shadow-lg bg-white z-50">
             {!selectedLocality && autoCompleteState && (
               <AutoComplete
                 autoCompleteState={autoCompleteState}
@@ -84,7 +85,7 @@ const Weather = () => {
         </div>
         <Button>Search</Button>
       </form>
-      {JSON.stringify(weatherState)}
+      {weatherState && <WeatherCard {...weatherState} />}
     </div>
   );
 };
