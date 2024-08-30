@@ -2,7 +2,7 @@
 import axios from "axios";
 import CSVtoJson from "./utils";
 
-export const getWeatherData = async (locality_id) => {
+export const getWeatherData = async (locality_id: string) => {
   const options = {
     method: "GET",
     url: "https://www.weatherunion.com/gw/weather/external/v0/get_locality_weather_data",
@@ -23,7 +23,7 @@ export const getWeatherData = async (locality_id) => {
   }
 };
 
-export const getAutoComplete = async (localityName) => {
+export const getAutoComplete = async (localityName: string) => {
   const localityData = await CSVtoJson();
   return localityData
     ?.filter((item) => {

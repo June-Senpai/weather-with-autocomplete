@@ -1,10 +1,12 @@
-import { error } from "console";
 import { readFile } from "fs/promises";
 import path from "path";
+interface CsvItem {
+  [key: string]: string;
+}
 
-const json = [];
+const json: CsvItem[] = [];
 
-function getValuesFromLine(line) {
+function getValuesFromLine(line: string): string[] {
   const isLocalityNameInQuotes = line.includes('"');
   if (!isLocalityNameInQuotes) {
     return line.trim().split(",");
@@ -15,7 +17,7 @@ function getValuesFromLine(line) {
   return [cityName, localityName, ...rest];
 }
 
-const CSVtoJson = async () => {
+const CSVtoJson = async (): Promise<CsvItem[] | undefined> => {
   const isDataEmpty = json.length === 0;
   if (!isDataEmpty) {
     return json;
@@ -24,16 +26,17 @@ const CSVtoJson = async () => {
   try {
     const data = await readFile(filePath, { encoding: "utf-8" });
     const lines = data.split("\r\n");
-    let attributes = [];
+    let attributes: string[] = [];
 
     lines.forEach((line, index) => {
       if (index === 0) {
         attributes = line.split(",");
+        return;
       }
 
       const values = getValuesFromLine(line);
 
-      const item = {};
+      const item: CsvItem = {};
 
       values.forEach((value, index) => {
         if (!value) {

@@ -5,15 +5,29 @@ import AutoComplete from "./AutoComplete";
 import Image from "next/image";
 import Button from "./ui/button";
 
+type WeatherDataProps = {
+  temperature: number;
+  humidity: number;
+  wind_speed: number;
+  wind_direction: number;
+  rain_intensity: number;
+  rain_accumulation: number;
+};
+
+type LocalityItem = {
+  localityId: string;
+  localityName: string;
+};
+
 const Weather = () => {
-  const [weatherState, setWeatherState] = useState(null);
-  const [autoCompleteState, setAutoCompleteState] = useState(null);
-  const [selectedLocality, setSelectedLocality] = useState(null);
+  const [weatherState, setWeatherState] = useState<WeatherDataProps | null>(null);
+  const [autoCompleteState, setAutoCompleteState] = useState<LocalityItem[] | null>(null);
+  const [selectedLocality, setSelectedLocality] = useState<LocalityItem | null>(null);
   const [inputValue, setInputValue] = useState("");
 
-  const handleFormSubmit = async (e) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const localityId = selectedLocality?.localityId || autoCompleteState[0]?.localityId;
+    const localityId = selectedLocality?.localityId || autoCompleteState?.[0]?.localityId;
     if (!localityId) {
       return;
     }
@@ -21,7 +35,7 @@ const Weather = () => {
     setWeatherState(data);
   };
 
-  const handleOnChange = async (e) => {
+  const handleOnChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;
     setInputValue(inputValue);
     setSelectedLocality(null);

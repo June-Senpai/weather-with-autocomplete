@@ -1,8 +1,6 @@
-const Button = ({ children, onClick }) => {
+const Button = ({ children }: { children: React.ReactNode }) => {
   return (
-    <button
-      onClick={onClick}
-      className="flex items-center p-4  bg-gray-200 rounded-lg overflow-hidden text-[#1b1b1d] group relative">
+    <button className="flex items-center p-4  bg-gray-200 rounded-lg overflow-hidden text-[#1b1b1d] group relative">
       <span className="flex flex-col h-6 overflow-hidden relative z-30 text-lg sm:text-xl md:text-xl ">
         <span className="text-white transform -translate-y-full group-hover:transform group-hover:-translate-y-1 duration-300 ease-in-out">
           {children}
