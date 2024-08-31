@@ -1,10 +1,9 @@
 "use client";
 
-import { CsvItem } from "../util/utils";
 import { LocalityItem } from "./Weather";
 
 type AutoCompleteProps = {
-  autoCompleteState: LocalityItem[] | CsvItem[];
+  autoCompleteState: LocalityItem[];
   setSelectedLocality: (locality: LocalityItem | string) => void;
   setInputValue: (value: string) => void;
 };

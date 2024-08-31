@@ -5,7 +5,6 @@ import AutoComplete from "./AutoComplete";
 import Image from "next/image";
 import Button from "./ui/button";
 import WeatherCard from "./ui/WeatherCard";
-import { CsvItem } from "../util/utils";
 
 type WeatherDataProps = {
   temperature: number;
@@ -23,9 +22,7 @@ export type LocalityItem = {
 
 const Weather = () => {
   const [weatherState, setWeatherState] = useState<WeatherDataProps | null>(null);
-  const [autoCompleteState, setAutoCompleteState] = useState<LocalityItem[] | CsvItem[] | null>(
-    null
-  );
+  const [autoCompleteState, setAutoCompleteState] = useState<LocalityItem[] | null>(null);
   const [selectedLocality, setSelectedLocality] = useState<string | LocalityItem | null>(null);
   const [inputValue, setInputValue] = useState("");
 

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Weather from "./components/Weather";
 
 export default function Home() {
+  console.log(process.cwd());
   return (
     <main className="flex h-screen justify-center items-center flex-col gap-4">
       <Image

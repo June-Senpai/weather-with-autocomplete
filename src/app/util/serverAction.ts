@@ -1,6 +1,6 @@
 "use server";
 import axios from "axios";
-import CSVtoJson from "./utils";
+import localityData from "./LocalityData.json";
 
 export const getWeatherData = async (locality_id: string) => {
   const options = {
@@ -24,7 +24,6 @@ export const getWeatherData = async (locality_id: string) => {
 };
 
 export const getAutoComplete = async (localityName: string) => {
-  const localityData = await CSVtoJson();
   return localityData
     ?.filter((item) => {
       if (!item.localityName) {
