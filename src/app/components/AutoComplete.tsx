@@ -3,14 +3,11 @@
 import { useEffect, useRef } from "react";
 import { LocalityItem } from "./Weather";
 
-const getIsNoElementActive = (container: HTMLElement, children: HTMLCollection) => {
-  const length = children.length;
-  for (let i = 0; i < length; i++) {
-    if (container.contains(children[i])) {
-      return false;
-    }
+const getIsNoElementActive = (container: HTMLElement, activeElement: Element | null) => {
+  if (!activeElement) {
+    return true;
   }
-  return true;
+  return container.contains(activeElement);
 };
 
 type AutoCompleteProps = {
@@ -46,22 +43,24 @@ const AutoComplete = ({
       const containerEl = containerRef.current;
       const activeElement = document.activeElement;
 
-      const isNoItemActive = getIsNoElementActive(containerEl, items);
+      const isNoItemActive = getIsNoElementActive(containerEl, activeElement);
 
       if (isDownArrow) {
-        if (!isNoItemActive) {
+        const nextSibling = activeElement?.nextElementSibling;
+        if (!isNoItemActive || !nextSibling) {
           const firstChild = containerEl?.firstChild;
           (firstChild as HTMLElement)?.focus?.();
         }
-        (activeElement?.nextElementSibling as HTMLElement)?.focus();
+        (nextSibling as HTMLElement)?.focus();
       }
 
       if (isUpArrow) {
-        if (!isNoItemActive) {
+        const previousSibling = activeElement?.previousElementSibling;
+        if (!isNoItemActive || !previousSibling) {
           const lastChild = containerEl?.lastChild;
           (lastChild as HTMLElement)?.focus?.();
         }
-        (activeElement?.previousElementSibling as HTMLElement)?.focus();
+        (previousSibling as HTMLElement)?.focus();
       }
     };
 
