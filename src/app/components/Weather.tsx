@@ -77,7 +77,7 @@ const Weather = () => {
             }`}
           />
           <Image
-            src={"./Search Icon.svg"}
+            src={"./SearchIcon.svg"}
             height={20}
             width={20}
             alt="Logo"
