@@ -25,7 +25,6 @@ const Weather = () => {
   const [autoCompleteState, setAutoCompleteState] = useState<LocalityItem[] | null>(null);
   const [selectedLocality, setSelectedLocality] = useState<string | LocalityItem | null>(null);
   const [inputValue, setInputValue] = useState("");
-
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let localityId;
