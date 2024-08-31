@@ -20,11 +20,14 @@ const AutoComplete = ({
   };
 
   return (
-    <div className="border-b-2">
+    <div className="border-b-2  flex flex-col ">
       {autoCompleteState.map((item, index) => (
-        <div key={index} onClick={() => handleClick(item.localityName)} className="">
+        <button
+          key={index}
+          onClick={() => handleClick(item.localityName)}
+          className="flex-1 hover:bg-gray-200 text-left px-4 py-1">
           {item.localityName}
-        </div>
+        </button>
       ))}
     </div>
   );

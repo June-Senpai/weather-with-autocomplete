@@ -62,7 +62,7 @@ const Weather = () => {
 
   return (
     <div>
-      <form onSubmit={handleFormSubmit} className="flex gap-5 items-center">
+      <form onSubmit={handleFormSubmit} className="flex gap-5 items-center" autoComplete="off">
         <div className="relative ">
           <input
             type="text"
@@ -70,7 +70,7 @@ const Weather = () => {
             autoFocus
             value={inputValue}
             onChange={handleOnChange}
-            className={` h-[55px] w-[500px] p-2 indent-12 focus:outline-none ${
+            className={` h-[55px] md:w-[500px] w-60 p-2 indent-12 focus:outline-none ${
               !selectedLocality && autoCompleteState
                 ? "border-t-2 border-x-2 rounded-t-xl "
                 : "border-2 rounded-xl hover:drop-shadow-lg "
@@ -83,7 +83,7 @@ const Weather = () => {
             alt="Logo"
             className="absolute top-[18px] left-5 "
           />
-          <div className="absolute border-x-2 top-12 w-full left-0 indent-4 rounded-b-md shadow-lg bg-white z-50">
+          <div className="absolute border-x-2 top-12 w-full left-0 rounded-b-md shadow-lg bg-white z-50">
             {!selectedLocality && autoCompleteState && (
               <AutoComplete
                 autoCompleteState={autoCompleteState}
