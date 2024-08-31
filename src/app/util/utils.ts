@@ -1,6 +1,6 @@
 import { readFile } from "fs/promises";
 import path from "path";
-interface CsvItem {
+export interface CsvItem {
   [key: string]: string;
 }
 

@@ -1,13 +1,11 @@
 "use client";
 
-type LocalityItem = {
-  localityId: string;
-  localityName: string;
-};
+import { CsvItem } from "../util/utils";
+import { LocalityItem } from "./Weather";
 
 type AutoCompleteProps = {
-  autoCompleteState: LocalityItem[];
-  setSelectedLocality: (locality: LocalityItem) => void;
+  autoCompleteState: LocalityItem[] | CsvItem[];
+  setSelectedLocality: (locality: LocalityItem | string) => void;
   setInputValue: (value: string) => void;
 };
 
@@ -16,7 +14,7 @@ const AutoComplete = ({
   setSelectedLocality,
   setInputValue,
 }: AutoCompleteProps) => {
-  const handleClick = (item) => {
+  const handleClick = (item: string) => {
     setSelectedLocality(item);
     setInputValue(item);
   };

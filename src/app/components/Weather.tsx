@@ -5,6 +5,7 @@ import AutoComplete from "./AutoComplete";
 import Image from "next/image";
 import Button from "./ui/button";
 import WeatherCard from "./ui/WeatherCard";
+import { CsvItem } from "../util/utils";
 
 type WeatherDataProps = {
   temperature: number;
@@ -15,20 +16,28 @@ type WeatherDataProps = {
   rain_accumulation: number;
 };
 
-type LocalityItem = {
+export type LocalityItem = {
   localityId: string;
   localityName: string;
 };
 
 const Weather = () => {
   const [weatherState, setWeatherState] = useState<WeatherDataProps | null>(null);
-  const [autoCompleteState, setAutoCompleteState] = useState<LocalityItem[] | null>(null);
-  const [selectedLocality, setSelectedLocality] = useState<LocalityItem | null>(null);
+  const [autoCompleteState, setAutoCompleteState] = useState<LocalityItem[] | CsvItem[] | null>(
+    null
+  );
+  const [selectedLocality, setSelectedLocality] = useState<string | LocalityItem | null>(null);
   const [inputValue, setInputValue] = useState("");
 
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const localityId = selectedLocality?.localityId || autoCompleteState?.[0]?.localityId;
+    let localityId;
+
+    if (typeof selectedLocality === "string") {
+      localityId = autoCompleteState?.[0]?.localityId;
+    } else {
+      localityId = selectedLocality?.localityId;
+    }
     if (!localityId) {
       return;
     }
@@ -43,12 +52,13 @@ const Weather = () => {
 
     if (inputValue !== "") {
       const data = await getAutoComplete(inputValue);
-      setAutoCompleteState(data);
+      if (data !== undefined) {
+        setAutoCompleteState(data);
+      }
     } else {
       setAutoCompleteState(null);
     }
   };
-  console.log(inputValue);
 
   return (
     <div>
