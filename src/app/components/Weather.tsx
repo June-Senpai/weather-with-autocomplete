@@ -25,6 +25,8 @@ const Weather = () => {
   const [autoCompleteState, setAutoCompleteState] = useState<LocalityItem[] | null>(null);
   const [selectedLocality, setSelectedLocality] = useState<string | LocalityItem | null>(null);
   const [inputValue, setInputValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     let localityId;
@@ -37,7 +39,9 @@ const Weather = () => {
     if (!localityId) {
       return;
     }
+    setIsLoading(true);
     const data = await getWeatherData(localityId);
+    setIsLoading(false);
     setWeatherState(data);
   };
 
@@ -89,8 +93,9 @@ const Weather = () => {
             )}
           </div>
         </div>
-        <Button>Search</Button>
+        <Button isLoading={isLoading}>Search</Button>
       </form>
+
       {weatherState && <WeatherCard {...weatherState} />}
     </div>
   );

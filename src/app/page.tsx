@@ -9,6 +9,7 @@ export default function Home() {
         height={111}
         width={330}
         alt="Logo"
+        priority
         className="bg-[#1b1b1d] p-2 rounded-lg"
       />
       <Weather />
